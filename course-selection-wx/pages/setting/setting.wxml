@@ -1,0 +1,7 @@
+<!--pages/setting/setting.wxml-->
+<view>
+  <van-cell-group>
+    <van-cell title="修改密码" url="/pages/updatePassword/updatePassword" is-link label="首次登录后请尽快修改密码"/>
+    <van-cell title="退出登录" is-link bindtap="logout"/>
+  </van-cell-group>
+</view>

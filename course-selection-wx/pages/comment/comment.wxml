@@ -1,0 +1,20 @@
+<!--pages/comment/comment.wxml-->
+<view>
+  <view>
+    <van-search placeholder="请输入课程或教师名" bind:change="keywordChange" />
+  </view>
+  <view>
+    <van-cell-group>
+      <van-cell center bindtap="enterCourse" data-id="{{item.id}}" wx:for="{{courses}}" wx:key="id" title="" label="" value="{{item.teacherName}}" is-link>
+        <view slot="title" style="width:200px;">
+          <van-tag type="success" wx:if="{{item.type=='公共选修'}}">公选</van-tag>
+          <van-tag type="danger" wx:elif="{{item.type=='A系列'}}">A系</van-tag>
+          <van-tag type="primary" wx:elif="{{item.type=='专业选修'}}">专修</van-tag>
+          {{item.name}}
+        </view>
+      </van-cell>
+    </van-cell-group>
+    <van-divider wx:if="{{!coursesAllshow}}" contentPosition="center">正在加载...</van-divider>
+    <van-divider wx:else contentPosition="center">无更多课程</van-divider>
+  </view>
+</view>

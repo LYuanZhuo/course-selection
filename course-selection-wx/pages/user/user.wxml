@@ -1,0 +1,82 @@
+<!-- 个人中心 -->
+<view class="container" wx:if="{{user}}">
+
+  <view class="userContainer">
+    <view class="userBaseInfo">
+      <view class="userAvatar">
+        <van-image round width="3rem" height="3rem" src="{{user?user.avatarUrl:'/static/icon/avatar.jpg'}}"></van-image>
+      </view>
+      <view class="userInfo">
+        <view>
+          <view class="userName">{{user.name}}</view>
+          <view class="studentId">学号：{{user.studentId}}</view>
+        </view>
+      </view>
+    </view>
+    <view class="userScore">
+      <van-icon name="gold-coin" />{{user.score}}
+    </view>
+  </view>
+
+  <view class="userOtherInfoContainer">
+    <view class="grade">
+      <van-icon name="idcard" />{{user.grade}}级</view>
+    <view class="college">
+      <van-icon name="wap-home-o" />{{user.college}}</view>
+  </view>
+
+  <view class="menuContainer">
+    <van-grid column-num="4">
+      <van-grid-item icon="calender-o" bind:click="gotoMyCourse" text="我的选课" />
+      <van-grid-item icon="label-o" bind:click="gotoMyComment" text="我的评价" />
+      <van-grid-item icon="orders-o" bind:click="gotoMySchedule" text="我的课程表" />
+      <van-grid-item icon="setting-o" bind:click="gotoSetting" text="设置" />
+    </van-grid>
+  </view>
+  <view class="myRecentCourses">
+    <view class="myRecentCourseText">我的最近选课</view>
+    <van-cell-group>
+      <van-cell center bindlongtap="enterItem" data-item_id="{{item.itemId}}" bindtap="enterCourse" data-id="{{item.basecourseId}}" wx:for="{{recentCourses}}" wx:key="id" title=""  use-label-slot>
+        <view slot="" >
+          <view class="{{item.status==1?'success':item.status==2?'fail':''}}">{{item.selectResult}}</view>
+        </view>
+        <view slot="title" style="width:200px;font-size:12px;">
+          <van-tag type="success" wx:if="{{item.courseType=='公共选修'}}">公选</van-tag>
+          <van-tag type="danger" wx:elif="{{item.courseType=='A系列'}}">A系</van-tag>
+          <van-tag type="primary" wx:elif="{{item.courseType=='专业选修'}}">专修</van-tag>
+          {{item.courseFullName}}
+        </view>
+        <view slot="label" style="width:200px">
+          <view>{{item.time}}</view>
+          <view>投注积分:{{item.score}}</view>
+          <view wx:if="{{item.status==0}}">
+            <van-count-down wx:if="{{item.status==0}}" time="{{ item.remainTime}}" format="DD天HH时mm分ss秒后公布结果"/>
+          </view>
+        </view>
+      </van-cell>
+    </van-cell-group>
+    <van-divider contentPosition="center">无更多记录</van-divider>
+  </view>
+</view>
+
+
+
+
+
+<!-- 登陆页 -->
+<view wx:else class="loginContainer">
+  <view class="logoContainer">
+    <van-image width="200" height="80" src="/static/icon/logo.png"></van-image>
+  </view>
+  <view class="inputContainer">
+    <van-cell-group>
+      <van-field value="{{param.account}}" bind:change="accountChange" type="digit" label="学号" />
+      <van-field value="{{param.password}}" bind:change="passwordChange" type="password" label="密码" />
+    </van-cell-group>
+    <view class="tips">初始密码为学号,如有问题请联系管理员</view>
+    <view class="buttonContainer">
+      <button class="loginButton" type="primary" wx:if="{{!loginLoading}}" open-type="getUserInfo" bindgetuserinfo="getUserInfoResult">登录</button>
+      <button type="primary" class="loginButton" wx:else loading>登录中...</button>
+    </view>
+  </view>
+</view>

@@ -1,0 +1,130 @@
+/* pages/courseDetail/courseDetail.wxss */
+@import "/app.wxss";
+
+.courseDetailContainer {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin-bottom: 5px;
+  padding: 20px;
+  background: white;
+}
+.courseScore{
+  margin-bottom: 5px;
+}
+.courseName{
+  font-size: 18px;
+  margin-bottom: 5px;
+}
+.courseType{
+  color: #696969;
+  font-size: 13px;
+}
+.courseTeacherName{
+  text-align: center;
+  font-size: 13px;
+}
+.commentContainer {
+  background: white;
+  align-content: center;
+  width: 100%;
+}
+
+.item_box {
+  font-size: 14px;
+  color: gray;
+  padding: 10px;
+  padding-bottom: 20px;
+}
+
+.item_firstRow {
+  display: flex;
+  flex-direction: row;
+}
+
+.item_row {
+  display: flex;
+  flex-direction: row;
+  margin-top: 5px;
+  color: #696969;
+}
+
+.left {
+  width: 15%;
+  color: black;
+}
+
+.right {
+  width: 85%;
+}
+button::after{
+  border: none;
+}
+.commentGrade{
+  background: white;
+  padding: 8px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+}
+.gradeButton {
+  width: 55px;
+  height: 28px;
+  border-radius: 8px;
+  background: rgb(247, 247, 247);
+  font-size: 12px;
+  margin: 2px;
+  float: left;
+}
+.gradeSelectButton {
+  width: 55px;
+  height: 28px;
+  border-radius: 8px;
+  background: rgb(255, 232, 232);
+  color: rgb(238, 23, 23);
+  font-size: 12px;
+  margin: 2px;
+  float: left;
+}
+.commentButton{
+  width: 80px;
+  height: 28px;
+  font-size: 12px;
+  margin: 2px;
+}
+.myCommentContainer{
+  padding: 20px;
+}
+.item{
+  display: flex;
+  flex-direction: row;
+  font-size: 12px;
+  color: #696969;
+}
+.item .label{
+  width: 30%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+.item .value{
+  width: 70%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+.tipAndButton{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+
+}
+.tipAndButton .tip{
+  padding-top: 5px;
+  font-size: 11px;
+  color: gray;
+}
+.tipAndButton .buttonContainer{
+  padding-top: 5px;
+}

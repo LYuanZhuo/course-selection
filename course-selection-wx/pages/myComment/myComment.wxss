@@ -1,0 +1,43 @@
+/* pages/myComment/myComment.wxss */
+@import '/app.wxss';
+
+.myCommentDetail{
+  padding: 10px;
+  text-align: center;
+  font-size: 15px;
+  background: white;
+}
+.commentContainer{
+  background: white;
+}
+.comment_box{
+  padding: 10px;
+  margin-bottom: 10px;
+  color: #696969;
+  
+}
+.comment_course_time{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+.comment_course_time course{
+ 
+}
+.comment_course_time time{
+  
+}
+
+.comment_row {
+  display: flex;
+  flex-direction: row;
+  margin-top: 5px;
+}
+
+.comment_row left {
+  width: 14%;
+}
+
+.comment_row right {
+  width: 82%;
+}

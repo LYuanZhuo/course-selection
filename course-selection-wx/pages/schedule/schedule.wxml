@@ -1,0 +1,46 @@
+<view class="container">
+  <view>
+    <van-dropdown-menu>
+      <van-dropdown-item bind:change="yearChange" value="{{ params.year }}" options="{{ years }}" />
+      <van-dropdown-item bind:change="quarterChange" value="{{ params.quarter }}" options="{{ quarters }}" />
+    </van-dropdown-menu>
+  </view>
+
+
+  <view class="schedule">
+
+    <view class="classIndexs">
+      <view class="noneBox" ></view>
+      <view class="classIndex" wx:for="{{classIndexs}}" wx:key="index">
+        {{item}}
+      </view>
+    </view>
+
+    <view class="movableContainer">
+      <movable-area  scale-area class="movablAarea">
+      <movable-view direction="horizontal" class="movableView">
+          <view class="days">
+            <view class="day" wx:for="{{days}}" wx:key="index">
+              {{item}}
+            </view>
+          </view>
+          <view class="coursesContainer">
+            <view class="courseRow" wx:for="{{schedule}}" wx:key="index">
+              <view class="courseItem" wx:for="{{item}}" wx:for-item="course" wx:key="courseIndex">
+                <view wx:if="{{course}}" class="course"><text>
+                 {{course.courseName}}
+                 {{course.startWeek}} - {{course.endWeek}}周
+                 {{course.teacherName}}
+                 </text></view>
+                <view wx:else class="noCourse"></view>
+              </view>
+            </view>
+          </view>
+      </movable-view>
+    </movable-area>
+    </view>
+    
+  </view>
+
+
+</view>

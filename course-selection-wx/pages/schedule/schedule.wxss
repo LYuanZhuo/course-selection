@@ -1,0 +1,88 @@
+/* pages/schedule/schedule.wxss */
+@import '/app.wxss';
+page{
+  width: 100%;
+}
+.schedule{
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  font-size: 13px;
+  color: #696969;
+  border: 1px rgb(220, 220, 220) solid;
+}
+.classIndexs{
+  display: flex;
+  flex-direction: column;
+  width: 10%;
+  height: 100%;
+  z-index: 1;
+  background: #C0C0C0;
+  color: white;
+}
+.noneBox{
+  border-right: 1px rgb(220, 220, 220) solid;
+  border-bottom: 1px rgb(220, 220, 220) solid;
+  height: 30px;
+  background: #A9A9A9;
+}
+.classIndex{
+  border-right: 1px rgb(220, 220, 220) solid;   
+  border-bottom: 1px rgb(220, 220, 220) solid;
+  height: 100px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.movableContainer{
+  width: 90%;
+}
+.movablAarea{
+  height: 100%;
+  width: 100%;
+}
+.movableView{
+  height: 100%;
+  width: 560px;
+  background: white;
+}
+.days{
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  background: #D3D3D3;
+  color: white;
+}
+.day{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border-right: 1px rgb(220, 220, 220) solid;   
+  border-bottom: 1px rgb(220, 220, 220) solid;
+  width: 60px;
+  height: 30px;
+}
+.coursesContainer{
+  display: flex;
+  flex-direction: column;
+}
+.courseRow{
+  display: flex;
+  flex-direction: row;
+}
+.courseItem{
+  border-right: 1px rgb(220, 220, 220) solid;   
+  border-bottom: 1px rgb(220, 220, 220) solid;
+  width: 60px;
+  height: 100px;
+}
+.course{
+  text-align: center;
+  font-size: 13px;
+  color: #696969;
+}
+.noCourse{
+  
+}

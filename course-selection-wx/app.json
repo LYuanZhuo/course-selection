@@ -1,0 +1,70 @@
+{
+  "usingComponents": {
+    "van-search": "dist/search/index",
+    "van-button": "dist/button/index",
+    "van-image": "dist/image/index",
+    "van-popup": "dist/popup/index",
+    "van-rate": "dist/rate/index",
+    "van-stepper": "dist/stepper/index",
+    "van-divider": "dist/divider/index",
+    "van-field": "dist/field/index",
+    "van-cell": "dist/cell/index",
+    "van-cell-group": "dist/cell-group/index",
+    "van-switch": "dist/switch/index",
+    "van-grid": "dist/grid/index",
+    "van-grid-item": "dist/grid-item/index",
+    "van-icon": "dist/icon/index",
+    "van-tab": "dist/tab/index",
+    "van-tabs": "dist/tabs/index",
+    "van-count-down": "dist/count-down/index",
+    "van-dropdown-menu": "dist/dropdown-menu/index",
+    "van-dropdown-item": "dist/dropdown-item/index",
+    "van-swipe-cell": "dist/swipe-cell/index",
+    "van-notice-bar": "dist/notice-bar/index",
+    "van-tag": "dist/tag/index",
+    "van-collapse": "dist/collapse/index",
+    "van-collapse-item": "dist/collapse-item/index"
+  },
+  "pages": [
+    "pages/select/select",
+    "pages/comment/comment",
+    "pages/user/user",
+    "pages/schedule/schedule",
+    "pages/myCourse/myCourse",
+    "pages/myComment/myComment",
+    "pages/itemDetail/itemDetail",
+    "pages/courseDetail/courseDetail",
+    "pages/setting/setting",
+    "pages/updatePassword/updatePassword",
+    "pages/test/test"
+  ],
+  "window": {
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#fff",
+    "navigationBarTitleText": "WeChat",
+    "navigationBarTextStyle": "black"
+  },
+  "sitemapLocation": "sitemap.json",
+  "tabBar": {
+    "list": [
+      {
+        "pagePath": "pages/select/select",
+        "text": "选课",
+        "iconPath":"/static/icon/home.png",
+        "selectedIconPath": "/static/icon/home.png"
+      },
+      {
+        "pagePath": "pages/comment/comment",
+        "text": "评教",
+        "iconPath": "/static/icon/comment.png",
+        "selectedIconPath": "/static/icon/comment.png"
+      },
+      {
+        "pagePath": "pages/user/user",
+        "text": "个人中心",
+        "iconPath": "/static/icon/user.png",
+        "selectedIconPath": "/static/icon/user.png"
+      }
+    ]
+  }
+}

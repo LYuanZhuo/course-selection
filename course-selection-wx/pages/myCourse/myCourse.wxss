@@ -1,0 +1,7 @@
+/* pages/myCourse/myCourse.wxss */
+.success{
+  color: green;
+}
+.fail{
+  color:#e01f1f;
+}

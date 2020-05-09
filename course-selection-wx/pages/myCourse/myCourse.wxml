@@ -1,0 +1,74 @@
+<!--pages/myCourse/myCourse.wxml-->
+<view>
+  <van-tabs active="0" swipeable animated bind:change="getCourses">
+
+    <van-tab title="选课中" name="0">
+      <van-cell-group>
+        <van-cell center bindlongtap="enterItem" data-item_id="{{item.itemId}}" bindtap="enterCourse"  data-id="{{item.basecourseId}}" wx:for="{{selectingCourses}}" wx:key="id" title="" value="投掷积分:{{item.score}}" use-label-slot>
+          <view slot="title" style="width:200px;font-size:12px;">
+            <van-tag type="success" wx:if="{{item.courseType=='公共选修'}}">公选</van-tag>
+            <van-tag type="danger" wx:elif="{{item.courseType=='A系列'}}">A系</van-tag>
+            <van-tag type="primary" wx:elif="{{item.courseType=='专业选修'}}">专修</van-tag>
+            {{item.courseFullName}}
+          </view>
+          <view slot="label" style="width:200px">
+            <van-count-down style="color:red" time="{{ item.remainTime }}" format="DD天HH时mm分ss秒后公布结果" />
+          </view>
+        </van-cell>
+      </van-cell-group>
+      <van-divider contentPosition="center">无更多记录</van-divider>
+    </van-tab>
+
+    <van-tab title="成功选课" name="1">
+      <van-cell-group>
+        <van-cell center bindlongtap="enterItem" data-item_id="{{item.itemId}}" bindtap="enterCourse" data-id="{{item.basecourseId}}" wx:for="{{selectSuccessCourses}}" wx:key="id" title="" label="{{item.courseType}}" value="积分:{{item.score}}">
+          <view slot="title" style="width:200px;font-size:12px;">
+            <van-tag type="success" wx:if="{{item.courseType=='公共选修'}}">公选</van-tag>
+            <van-tag type="danger" wx:elif="{{item.courseType=='A系列'}}">A系</van-tag>
+            <van-tag type="primary" wx:elif="{{item.courseType=='专业选修'}}">专修</van-tag>
+            {{item.courseFullName}}
+          </view>
+        </van-cell>
+      </van-cell-group>
+      <van-divider contentPosition="center">无更多记录</van-divider>
+    </van-tab>
+
+    <van-tab title="失败选课" name="2">
+      <van-cell-group>
+        <van-cell center bindlongtap="enterItem" data-item_id="{{item.itemId}}" bindtap="enterCourse" data-id="{{item.basecourseId}}" wx:for="{{selectFailCourses}}" wx:key="id" title="" label="{{item.courseType}}" value="积分:{{item.score}}">
+          <view slot="title" style="width:200px;font-size:12px;">
+            <van-tag type="success" wx:if="{{item.courseType=='公共选修'}}">公选</van-tag>
+            <van-tag type="danger" wx:elif="{{item.courseType=='A系列'}}">A系</van-tag>
+            <van-tag type="primary" wx:elif="{{item.courseType=='专业选修'}}">专修</van-tag>
+            {{item.courseFullName}}
+          </view>
+        </van-cell>
+      </van-cell-group>
+      <van-divider contentPosition="center">无更多记录</van-divider>
+    </van-tab>
+
+    <van-tab title="全部记录" name="-1">
+      <van-cell-group>
+        <van-cell center bindlongtap="enterItem" data-item_id="{{item.itemId}}" bindtap="enterCourse" data-id="{{item.basecourseId}}" wx:for="{{allCourses}}" wx:key="id" title="" use-label-slot>
+          <view slot="">
+            <view class="{{item.status==1?'success':item.status==2?'fail':''}}">{{item.selectResult}}</view>
+          </view>
+          <view slot="title" style="width:200px;font-size:12px;">
+            <van-tag type="success" wx:if="{{item.courseType=='公共选修'}}">公选</van-tag>
+            <van-tag type="danger" wx:elif="{{item.courseType=='A系列'}}">A系</van-tag>
+            <van-tag type="primary" wx:elif="{{item.courseType=='专业选修'}}">专修</van-tag>
+            {{item.courseFullName}}
+          </view>
+          <view slot="label" style="width:200px">
+            <view>{{item.time}}</view>
+            <view>投注积分:{{item.score}}</view>
+            <view wx:if="{{item.status==0}}">
+              <van-count-down wx:if="{{item.status==0}}" time="{{ item.remainTime}}" format="DD天HH时mm分ss秒后公布结果" />
+            </view>
+          </view>
+        </van-cell>
+      </van-cell-group>
+      <van-divider contentPosition="center">无更多记录</van-divider>
+    </van-tab>
+  </van-tabs>
+</view>

@@ -1,0 +1,38 @@
+<!--pages/myComment/myComment.wxml-->
+<view class="container">
+  <view class="myCommentDetail">
+    共找到{{comments.length}}条评价
+  </view>
+
+  <view class="commentContainer">
+    <view class="comment_box" bindtap="enterCourse" data-id="{{item.basecourseId}}" wx:for="{{comments}}" wx:key="id">
+      <view class="comment_course_time">
+        <view class="course">
+          {{item.courseName}}
+        </view>
+        <view class="time">
+          {{item.time}}
+        </view>
+      </view>
+      <view class="comment_row">
+        <view class="left">评分：</view>
+        <view class="right">
+          <van-rate readonly allow-half size="12" value="{{item.score}}" />
+        </view>
+      </view>
+      <view class="comment_row">
+        <view class="left">点名：</view>
+        <view class="right">{{item.callName}}</view>
+      </view>
+      <view class="comment_row">
+        <view class="left">作业：</view>
+        <view class="right">{{item.homework}}</view>
+      </view>
+      <view class="comment_row">
+        <view class="left">评价：</view>
+        <view class="right">{{item.comment}}</view>
+      </view>
+    </view>
+    <van-divider contentPosition="center">无更多评论</van-divider>
+  </view>
+</view>

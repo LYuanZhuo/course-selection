@@ -1,0 +1,108 @@
+<van-popup closeable show="{{ show }}" position="bottom" custom-style="height: 40%;" bind:close="closeComment">
+  <view class="myCommentContainer">
+    <view class="item">
+      <view class="label">课程评分: </view>
+      <view class="value">
+        <van-rate allow-half value="{{ addCommentParam.score }}" bind:change="scoreChange" />
+      </view>
+    </view>
+    <view class="item">
+      <view class="label">点名情况</view>
+      <view class="value">
+        <van-field bind:change="callNameChange" value="{{addCommentParam.callName }}" required clearable placeholder="请按实际情况描述" />
+      </view>
+    </view>
+    <view class="item">
+      <view class="label">作业情况</view>
+      <view class="value">
+        <van-field bind:change="homeworkChange" value="{{ addCommentParam.homework }}" type="text" placeholder="请按实际情况描述" required />
+      </view>
+    </view>
+    <view class="item">
+      <view class="label">课程评价</view>
+      <view class="value">
+        <van-field bind:change="commentChange" value="{{ addCommentParam.comment }}" type="text" placeholder="评价课程或老师等具体情况" required />
+      </view>
+    </view>
+    <view class="item">
+      <view class="label">是否匿名</view>
+      <view class="value">
+        <van-switch bind:change="anonymousChange" checked="{{addCommentParam.anonymous}}" size="24px" />
+      </view>
+    </view>
+    <view class="tipAndButton">
+      <view class="tip">请勿灌水或恶意评价！</view>
+      <view class="buttonContainer">
+        <van-button bindtap="addComment" size="small" type="primary">确认提交</van-button>
+      </view>
+    </view>
+  </view>
+</van-popup>
+
+
+<view class="container">
+
+  <view class="courseDetailContainer">
+    <view>
+      <view class="courseName">{{basecourse.name}}</view>
+      <view class="courseScore">
+        <van-rate readonly allow-half size="12" value="{{basecourse.score}}" />
+      </view>
+      <view class="courseType">{{basecourse.type}}</view>
+    </view>
+    <view>
+      <view>
+        <van-image round width="100rpx" height="100rpx" src="{{basecourse.teacherHeadImage}}" />
+      </view>
+      <view class="courseTeacherName">{{basecourse.teacherName}}</view>
+    </view>
+  </view>
+  <view class="commentGrade">
+    <view>
+      <button class="{{commentListParam.grade==0?'gradeSelectButton':'gradeButton'}}" bindtap="getCommentsByGrade" data-grade="0">全部</button>
+      <button class="{{commentListParam.grade==1?'gradeSelectButton':'gradeButton'}}" bindtap="getCommentsByGrade" data-grade="1">好评</button>
+      <button class="{{commentListParam.grade==2?'gradeSelectButton':'gradeButton'}}" bindtap="getCommentsByGrade" data-grade="2">中评</button>
+      <button class="{{commentListParam.grade==3?'gradeSelectButton':'gradeButton'}}" bindtap="getCommentsByGrade" data-grade="3">差评</button>
+    </view>
+    <view>
+      <button type="primary" class="commentButton" bindtap="openComment">我也来评</button>
+    </view>
+  </view>
+  <view class="commentContainer">
+    <view class="item_box" wx:for="{{comments}}" wx:key="id">
+      <view class="item_firstRow">
+        <view style="width:15%">
+          <van-image round width="80rpx" height="80rpx" src="{{item.userAvatarUrl==null?'/static/icon/niming.jpg':item.userAvatarUrl}}" />
+        </view>
+        <view style="width:59%">
+          <view style="color:#696969">{{item.userName}}</view>
+          <view style="font-size:12px">评分
+            <van-rate readonly allow-half size="12" value="{{item.score}}" />
+          </view>
+        </view>
+        <view style="width:26%">
+          {{item.time}}
+        </view>
+      </view>
+      <view class="item_row">
+        <view class="left">点名：</view>
+        <view class="right">{{item.callName}}</view>
+      </view>
+      <view class="item_row">
+        <view class="left">作业：</view>
+        <view class="right">{{item.homework}}</view>
+      </view>
+      <view class="item_row">
+        <view class="left">评价：</view>
+        <view class="right">{{item.comment}}</view>
+      </view>
+
+    </view>
+
+    <view class="divider">
+      <van-divider wx:if="{{!commentsAllshow}}" contentPosition="center">正在加载...</van-divider>
+      <van-divider wx:else contentPosition="center">无更多评论</van-divider>
+    </view>
+  </view>
+
+</view>

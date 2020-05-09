@@ -1,0 +1,85 @@
+<!--pages/itemDetail/itemDetail.wxml-->
+<van-popup closeable show="{{ show }}" position="bottom" custom-style="height: 30%;" bind:close="closeSelect">
+  <view style="margin:30rpx;">
+
+    <view class="item">
+      {{selectCourseName}}
+    </view>
+    <view class="item">
+      <view class="label">当前积分：</view>
+      <view class="value">{{userScore}}</view>
+    </view>
+    <view class="item">
+      <view class="label">请输入选课积分：</view>
+      <view class="value">
+        <van-stepper bind:change="scoreChange" value="{{ 0 }}" min="0" max="10" />
+      </view>
+    </view>
+    <van-button bindtap="select" type="primary">确认选课</van-button>
+  </view>
+</van-popup>
+
+<view class="container">
+
+  <view class="itemDetailContainer">
+    <view class="nameAndStatus">
+      <view class="itemName">{{item.name}}</view>
+      <view class="status"> {{item.status}}</view>
+    </view>
+    <view class="time">
+      <van-icon name="clock-o" /> {{item.startTime}} - {{item.endTime}}
+    </view>
+    <view class="grades">
+      <view class="label">选课年级：</view>
+      <view class="value">{{item.grades}}</view>
+    </view>
+    <view class="max_num">
+      <view class="label">最大可选：</view>
+      <view class="value">{{item.maxSelectNum}}</view>
+    </view>
+  </view>
+
+  <view class="selectedContainer" wx:if="{{selectedCourses.length>0}}">
+    <van-collapse value="{{ activeNames }}" bind:change="onChange">
+      <van-collapse-item title="" value="已选/可选：{{selectedCourses.length}}/{{item.maxSelectNum}}">
+        <view slot="title" class="mySelectedText">
+          <van-icon name="manager-o" />我的选课
+        </view>
+        <view class="myCourseTextAndScore">
+          <view class="userScore">
+            <van-icon name="gold-coin" />{{userScore}}
+          </view>
+          <view class="myCourseText">长按退选</view>
+        </view>
+        <van-cell-group>
+          <van-cell title="{{item.courseFullName}}" value="投掷积分：{{item.score}}" wx:for="{{selectedCourses}}" wx:key="id" bindlongtap="cancelSelect" data-id="{{item.courseId}}" data-score="{{item.score}}" data-name="{{item.courseFullName}}">
+          </van-cell>
+        </van-cell-group>
+      </van-collapse-item>
+    </van-collapse>
+
+  </view>
+
+  <view class="coursesContainer">
+    <van-cell-group>
+      <van-cell bindlongtap="enterCourse" data-id="{{item.basecourseId}}" center title="{{item.courseFullName}}" use-label-slot wx:for="{{courses}}" wx:key="id">
+        <view slot="label">
+          <text>{{item.type}} | {{item.classroomName}}
+            {{item.courseTimeDetail}} 
+          </text>
+        </view>
+        <view slot="" class="selectCount">
+          <view class="{{item.selectCount>item.count?'dangerColor':''}}">
+            {{item.selectCount}}/{{item.count}}
+          </view>
+          <view>
+            <button class="selctButton" round size="mini" wx:if="{{!item.selected}}" bindtap="openSelect" data-id="{{item.id}}" data-name="{{item.courseFullName}}" size="mini" type="primary">选定</button>
+            <button class="selctedButton" wx:else data-id="{{item.id}}" size="mini">已选</button>
+          </view>
+        </view>
+      </van-cell>
+    </van-cell-group>
+    <van-divider wx:if="{{!coursesAllshow}}" contentPosition="center">正在加载...</van-divider>
+    <van-divider wx:else contentPosition="center">已加载所有课程</van-divider>
+  </view>
+</view>

@@ -1,0 +1,10 @@
+
+
+  <movable-area style="height: 100%; width: 100%; background: red;" scale-area>
+
+
+    <movable-view style="height: 200px; width: 300px; background: blue;" direction="all" bindchange="onChange" bindscale="onScale" scale scale-min="0.5" scale-max="4" scale-value="2">
+    </movable-view>
+
+
+  </movable-area>

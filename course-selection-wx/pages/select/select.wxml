@@ -1,0 +1,18 @@
+<!--pages/select/select.wxml-->
+<view>
+  <view>
+    <van-search placeholder="请输入搜索关键词" bind:change="keywordChange" />
+  </view>
+  <view>
+    <van-cell-group>
+      <van-cell center bindtap="enterItem" data-id="{{item.id}}" wx:for="{{items}}" wx:key="id" title="{{item.name}}" label="{{item.detail}}"  is-link use-slot>
+      <view slot="">
+      <text wx:if="{{item.status=='未开始'}}" class="selectNotStartText">{{item.status}}</text>
+      <text wx:elif="{{item.status=='进行中'}}" class="selectingText">{{item.status}}</text>
+      <text wx:elif="{{item.status=='已结束'}}" class="selectEndText">{{item.status}}</text>
+      </view>
+      
+      </van-cell>
+    </van-cell-group>
+  </view>
+</view>

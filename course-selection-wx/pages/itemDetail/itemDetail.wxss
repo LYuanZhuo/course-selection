@@ -1,0 +1,106 @@
+/* pages/itemDetail/itemDetail.wxss */
+@import "/app.wxss";
+.itemDetailContainer{
+  background: white;
+  padding: 10px;
+  margin-bottom: 5px;
+  font-size: 14px;
+}
+.itemDetailContainer view{
+  display: flex;
+  flex-direction: row;
+  padding: 2px;
+}
+.grades{
+  margin-top: 10px;
+}
+.nameAndStatus{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding: 10px;
+}
+.time{
+  color: gray;
+  font-size: 13px;
+}
+.status{
+  color: rgb(148, 6, 6);
+  font-weight: bold;
+}
+.label{
+  color: gray;
+}
+.value{
+  color: black;
+}
+.itemName{
+  font-size: 18px;
+  color: black;
+}
+.selectedContainer{
+  background: white;
+}
+.myCourseTextAndScore{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px;
+  font-size: 14px;
+}
+.mySelectedText{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  font-weight: bold;
+}
+.myCourseText{
+  color: gray;
+  font-size: 12px;
+}
+.userScore{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  color: #CD9B1D;
+}
+.coursesContainer{
+  background: white;
+}
+.selctButton{
+  width: 80px;
+  height: 28px;
+}
+.selctedButton{
+  width: 80px;
+  height: 28px;
+  background: rgb(197, 17, 17);
+  color: white;
+}
+.selectCount{
+  padding: 5px;
+  color: black;
+}
+.item{
+  display: flex;
+  flex-direction: row;
+  font-size: 15px;
+  color: #696969;
+  margin-bottom: 8px;
+}
+.item .label{
+  width: 40%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+.item .value{
+  width: 60%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+.dangerColor{
+  color:rgb(197, 17, 17);
+}
