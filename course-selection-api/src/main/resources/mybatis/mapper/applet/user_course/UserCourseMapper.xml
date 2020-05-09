@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lyuan.applet.user_course.mapper.AppletUserCourseMapper">
+
+    <select id="listAllByItemAndUser" resultType="com.lyuan.applet.user_course.entity.UserCourseVO" parameterType="com.lyuan.applet.course.entity.UserSelectInItemDTO">
+        select uc.*,b.name courseName,t.name teacherName from user_course uc
+        left join course c on uc.course_id = c.id
+        left join basecourse b on c.basecourse_id = b.id
+        left join teacher t on t.id = b.teacher_id
+        where uc.user_id = #{userId}
+        <if test="itemId!=null and itemId>0">
+            and c.item_id = #{itemId}
+        </if>
+        order by uc.time desc
+    </select>
+
+    <select id="listAllByUser" resultType="com.lyuan.applet.user_course.entity.UserCourseVO" parameterType="com.lyuan.applet.user_course.entity.UserCourseByUserDTO">
+        select uc.*,b.type courseType,b.name courseName,b.id basecourseId,c.item_id itemId,t.name teacherName,i.start_time,i.end_time
+        from user_course uc
+        left join course c on uc.course_id = c.id
+        left join basecourse b on c.basecourse_id = b.id
+        left join teacher t on t.id = b.teacher_id
+        left join item i on i.id = c.item_id
+        where uc.user_id = #{userId}
+        <if test="status!=null and status>=0">
+            and uc.status = #{status}
+        </if>
+        order by uc.time desc
+        <if test="limit!=null and limit>=0">
+            limit 0,#{limit}
+        </if>
+    </select>
+
+    <select id="getClassSchedule" parameterType="com.lyuan.applet.user_course.entity.ClassScheduleDTO" resultType="com.lyuan.applet.course.entity.CourseVO">
+        select c.* ,b.name courseName ,t.name teacherName,cl.name classroomName from user_course uc
+        left join course c on c.id = uc.course_id
+        left join basecourse b on b.id = c.basecourse_id
+        left join teacher t on t.id = b.teacher_id
+        left join classroom cl on cl.id = c.classroom_id
+        where uc.user_id = #{userId} and uc.status = 1 and c.year = #{year} and c.quarter = #{quarter}
+        <if test="week!=null and week >0">
+            and (#{week}>=c.start_week and #{week} &lt;= c.end_week)
+        </if>
+    </select>
+
+    <select id="listByBasecourseAndUser" parameterType="com.lyuan.applet.course.entity.BasecourseAndUserDTO" resultType="com.lyuan.applet.course.entity.CourseVO">
+        select c.* ,b.name courseName from user_course uc
+        left join course c on c.id = uc.course_id
+        left join basecourse b on b.id = c.basecourse_id
+        where uc.user_id = #{userId} and b.id = #{basecourseId} and uc.status=1
+    </select>
+
+
+</mapper>

@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lyuan.admin.course.mapper.CourseMapper">
+    <sql id="list_where">
+        <where>
+            <if test="year!=null and year!=0">
+                and c.year = '${year}'
+            </if>
+            <if test="quarter!=null and quarter!=''">
+                and c.quarter = '${quarter}'
+            </if>
+            <if test="type!=null and type!=''">
+                and b.type = '${type}'
+            </if>
+            <if test="collegeName!=null and collegeName!=''">
+                and b.college = '${collegeName}'
+            </if>
+            <if test="courseName!=null and courseName!=''">
+                and b.name like '%${courseName}%'
+            </if>
+            <if test="teacherName!=null and teacherName!=''">
+                and t.name like '%${teacherName}%'
+            </if>
+        </where>
+    </sql>
+    <sql id="listByItem_where">
+            <if test="collegeName!=null and collegeName!=''">
+                and b.college = '${collegeName}'
+            </if>
+            <if test="type!=null and type!=''">
+                and b.type = '${type}'
+            </if>
+            <if test="courseName!=null and courseName!=''">
+                and b.name like '%${courseName}%'
+            </if>
+            <if test="teacherName!=null and teacherName!=''">
+                and t.name like '%${teacherName}%'
+            </if>
+    </sql>
+    <select id="getById" resultType="com.lyuan.admin.course.entity.CourseListVO"
+            parameterType="integer">
+        select c.*,i.name itemName,i.end_time itemEndTime,b.type type,b.name courseName,b.college collegeName,t.name teacherName,cl.name classroomName from
+        course c
+        left join basecourse b on c.basecourse_id = b.id
+        left join teacher t on b.teacher_id = t.id
+        left join classroom cl on c.classroom_id = cl.id
+        left join item i on i.id = c.item_id
+        where c.id = #{id}
+    </select>
+    <select id="list" resultType="com.lyuan.admin.course.entity.CourseListVO"
+            parameterType="com.lyuan.admin.course.entity.CourseListDTO">
+        select c.*,i.name itemName,b.type type,b.name courseName,b.college collegeName,t.name teacherName,cl.name classroomName from
+        course c
+        left join basecourse b on c.basecourse_id = b.id
+        left join teacher t on b.teacher_id = t.id
+        left join classroom cl on c.classroom_id = cl.id
+        left join item i on i.id = c.item_id
+        <include refid="list_where">
+            <property name="year" value="${year}"></property>
+            <property name="quarter" value="${quarter}"></property>
+            <property name="collegeName" value="${collegeName}"></property>
+            <property name="courseName" value="${courseName}"></property>
+            <property name="teacherName" value="${teacherName}"></property>
+            <property name="type" value="${type}"></property>
+        </include>
+        <include refid="commonSql.common_page_order">
+            <property name="offset" value="${offset}"></property>
+            <property name="pageSize" value="${pageSize}"></property>
+            <property name="ascOrDesc" value="${ascOrDesc}"></property>
+            <property name="orderBy" value="${orderBy}"></property>
+        </include>
+    </select>
+    <select id="count" resultType="long"
+            parameterType="com.lyuan.admin.course.entity.CourseListDTO">
+        select count(1) from
+        course c
+        left join basecourse b on c.basecourse_id = b.id
+        left join teacher t on b.teacher_id = t.id
+        left join classroom cl on c.classroom_id = cl.id
+        <include refid="list_where">
+            <property name="year" value="${year}"></property>
+            <property name="quarter" value="${quarter}"></property>
+            <property name="collegeName" value="${collegeName}"></property>
+            <property name="courseName" value="${courseName}"></property>
+            <property name="teacherName" value="${teacherName}"></property>
+            <property name="type" value="${type}"></property>
+        </include>
+    </select>
+
+    <select id="listByItemId" resultType="com.lyuan.admin.course.entity.CourseListVO"
+            parameterType="com.lyuan.admin.course.entity.CourseListDTO">
+        select c.*,b.type type,b.name courseName,b.college collegeName,t.name teacherName,cl.name classroomName from
+        course c
+        left join basecourse b on c.basecourse_id = b.id
+        left join teacher t on b.teacher_id = t.id
+        left join classroom cl on c.classroom_id = cl.id
+        where c.item_id = ${itemId}
+        <include refid="listByItem_where">
+            <property name="collegeName" value="${collegeName}"></property>
+            <property name="courseName" value="${courseName}"></property>
+            <property name="teacherName" value="${teacherName}"></property>
+            <property name="type" value="${type}"></property>
+        </include>
+        <include refid="commonSql.common_page_order">
+            <property name="offset" value="${offset}"></property>
+            <property name="pageSize" value="${pageSize}"></property>
+            <property name="ascOrDesc" value="${ascOrDesc}"></property>
+            <property name="orderBy" value="${orderBy}"></property>
+        </include>
+    </select>
+    <select id="countByItemId" resultType="long"
+            parameterType="com.lyuan.admin.course.entity.CourseListDTO">
+        select count(1) from course c
+        left join basecourse b on c.basecourse_id = b.id
+        left join teacher t on b.teacher_id = t.id
+        left join classroom cl on c.classroom_id = cl.id
+        where c.item_id = ${itemId}
+        <include refid="listByItem_where">
+            <property name="collegeName" value="${collegeName}"></property>
+            <property name="courseName" value="${courseName}"></property>
+            <property name="teacherName" value="${teacherName}"></property>
+            <property name="type" value="${type}"></property>
+        </include>
+    </select>
+
+    <select id="listEnableByItemId" resultType="com.lyuan.admin.course.entity.CourseListVO"
+            parameterType="com.lyuan.admin.course.entity.CourseListDTO">
+        select c.*,b.type type,b.name courseName,b.college collegeName,t.name teacherName,cl.name classroomName from
+        course c
+        left join basecourse b on c.basecourse_id = b.id
+        left join teacher t on b.teacher_id = t.id
+        left join classroom cl on c.classroom_id = cl.id
+        where c.item_id is null and year = ${year} and quarter = '${quarter}'
+        <include refid="listByItem_where">
+            <property name="collegeName" value="${collegeName}"></property>
+            <property name="courseName" value="${courseName}"></property>
+            <property name="teacherName" value="${teacherName}"></property>
+            <property name="type" value="${type}"></property>
+        </include>
+        <include refid="commonSql.common_page_order">
+            <property name="offset" value="${offset}"></property>
+            <property name="pageSize" value="${pageSize}"></property>
+            <property name="ascOrDesc" value="${ascOrDesc}"></property>
+            <property name="orderBy" value="${orderBy}"></property>
+        </include>
+    </select>
+
+    <select id="countEnableByItemId" resultType="long"
+            parameterType="com.lyuan.admin.course.entity.CourseListDTO">
+        select count(1) from course c
+        left join basecourse b on c.basecourse_id = b.id
+        left join teacher t on b.teacher_id = t.id
+        left join classroom cl on c.classroom_id = cl.id
+        where c.item_id is null and year = ${year} and quarter = '${quarter}'
+        <include refid="listByItem_where">
+            <property name="collegeName" value="${collegeName}"></property>
+            <property name="courseName" value="${courseName}"></property>
+            <property name="teacherName" value="${teacherName}"></property>
+            <property name="type" value="${type}"></property>
+        </include>
+    </select>
+
+    <update id="batchAddCourseToItem" parameterType="com.lyuan.admin.course.entity.AddCourseToItemDTO" >
+        update course set item_id = ${itemId} where id in
+        <foreach collection="courseIds" separator="," open="(" close=")" item="courseId">
+            ${courseId}
+        </foreach>
+    </update>
+</mapper>

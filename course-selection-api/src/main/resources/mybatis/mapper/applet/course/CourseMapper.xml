@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lyuan.applet.course.mapper.AppletCourseMapper">
+
+    <select id="checkConflict" parameterType="com.lyuan.applet.course.entity.CourseUserCheckConflictDTO" resultType="com.lyuan.applet.course.entity.Course">
+        select c.* from course c left join user_course uc on c.id = uc.course_id
+        where uc.user_id = #{userId} and c.year = #{year} and c.quarter = #{quarter}
+        and c.class_index = #{classIndex} and c.week_day = #{weekDay}
+        and !(end_week &lt; #{startWeek}||start_week &gt; #{endWeek})
+    </select>
+
+    <select id="countUserSelectInItem" resultType="int" parameterType="com.lyuan.applet.course.entity.UserSelectInItemDTO">
+        select count(1) from user_course uc
+        left join course c on uc.course_id = c.id
+        where uc.user_id = #{userId} and c.item_id = #{itemId}
+    </select>
+
+</mapper>

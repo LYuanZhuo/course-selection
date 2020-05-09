@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lyuan.applet.basecourse.mapper.AppletBasecourseMapper">
+
+   <select id="getBasecourseByUser" parameterType="com.lyuan.applet.basecourse.entity.BasecourseByUserDTO" resultType="com.lyuan.applet.basecourse.entity.Basecourse">
+       select b.* from user_course uc
+       left join course c on c.id = uc.course_id
+       left join basecourse b on b.id = c.basecourse_id
+       where uc.user_id = #{userId}
+       <if test="status!=null">
+           and uc.status = #{status}
+       </if>
+   </select>
+
+    <update id="updateBasecourseScore" parameterType="integer">
+        update basecourse set  score =
+        (select avg(score) from comment group by basecourse_id having basecourse_id=#{id})
+        where id = #{id}
+    </update>
+
+</mapper>

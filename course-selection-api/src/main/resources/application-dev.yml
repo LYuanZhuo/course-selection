@@ -1,0 +1,14 @@
+###########自定义##########
+ip: http://127.0.0.1:8081/
+imageSavePath: F:/project_resource/course-selection/image/
+imageVisitPath: ${ip}static/image/
+
+
+##########配置#################
+server:
+  port: 8081
+spring:
+  mvc:
+    static-path-pattern: /static/**
+  resources:
+    static-locations: file:F:/project_resource/course-selection/

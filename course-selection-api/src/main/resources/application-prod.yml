@@ -1,0 +1,21 @@
+###########自定义##########
+ip: http://47.97.91.13:8081/
+imageSavePath: /home/web/course-selection/image/
+imageVisitPath: ${ip}static/image/
+
+##########配置#################
+server:
+  port: 8081
+spring:
+  mvc:
+    static-path-pattern: /static/**
+  resources:
+    static-locations: file:/home/web/course-selection/
+  redis:
+    password: ZIB12584884
+logging:
+  file:
+    path: /home/web/course-selection
+    name: course_selection.log
+
+

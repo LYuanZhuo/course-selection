@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lyuan.admin.comment.mapper.CommentMapper">
+
+    <select id="listByCourse" parameterType="com.lyuan.admin.comment.entity.CommentListDTO"
+            resultType="com.lyuan.admin.comment.entity.CommentListVO">
+        select c.*,u.name userName,u.avatar_url userAvatarUrl,b.name courseName,t.name teacherName from comment c
+        left join user u on c.user_id = u.id
+        left join basecourse b on b.id = c.basecourse_id
+        left join teacher t on t.id = b.teacher_id
+        where c.basecourse_id = #{basecourseId}
+        <if test="grade==1">
+            and c.score &gt; 3.5
+        </if>
+        <if test="grade==2">
+            and c.score &gt;= 2 and c.score &lt;= 3.5
+        </if>
+        <if test="grade==3">
+            and c.score &lt; 2
+        </if>
+        <include refid="commonSql.common_page_order">
+            <property name="offset" value="${offset}"></property>
+            <property name="pageSize" value="${pageSize}"></property>
+            <property name="ascOrDesc" value="${ascOrDesc}"></property>
+            <property name="orderBy" value="${orderBy}"></property>
+        </include>
+    </select>
+
+    <select id="countByCourse" resultType="int" parameterType="com.lyuan.admin.comment.entity.CommentListDTO">
+        select count(1) from comment c
+        where c.basecourse_id = #{basecourseId}
+        <if test="grade==1">
+            and c.score &gt; 3.5
+        </if>
+        <if test="grade==2">
+            and c.score &gt;= 2 and c.score &lt;= 3.5
+        </if>
+        <if test="grade==3">
+            and c.score &lt; 2
+        </if>
+    </select>
+</mapper>

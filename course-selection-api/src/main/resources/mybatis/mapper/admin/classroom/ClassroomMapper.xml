@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lyuan.admin.classroom.mapper.ClassroomMapper">
+
+    <sql id="list_where">
+        <if test="building!=null and building!=''">
+            and building = '${building}'
+        </if>
+        <if test="floor!=null and floor>0">
+            and floor = ${floor}
+        </if>
+        <if test="leftSize!=null and leftSize>0">
+            and size >= ${leftSize}
+        </if>
+        <if test="rightSize!=null and rightSize>0">
+            and size &lt; ${rightSize}
+        </if>
+    </sql>
+    <select id="listEnable" resultType="com.lyuan.admin.classroom.entity.Classroom"
+            parameterType="com.lyuan.admin.classroom.entity.ClassroomListEnableDTO">
+        SELECT* from classroom where id not in
+        (select classroom_id from course
+        where year=${year} and quarter='${quarter}' and week_day=${weekDay} and class_index=${classIndex}
+        and !(start_week &gt; ${endWeek} or end_week &lt; ${startWeek})
+        )
+        <include refid="list_where">
+            <property name="building" value="${building}"></property>
+            <property name="floor" value="${floor}"></property>
+            <property name="leftSize" value="${leftSize}"></property>
+            <property name="rightSize" value="${rightSize}"></property>
+        </include>
+        <include refid="commonSql.common_page_order">
+            <property name="offset" value="${offset}"></property>
+            <property name="pageSize" value="${pageSize}"></property>
+            <property name="ascOrDesc" value="${ascOrDesc}"></property>
+            <property name="orderBy" value="${orderBy}"></property>
+        </include>
+    </select>
+
+    <select id="countListEnable" resultType="long"
+            parameterType="com.lyuan.admin.classroom.entity.ClassroomListEnableDTO">
+        SELECT count(1) from classroom where id not in
+        (select classroom_id from course
+        where year=${year} and quarter='${quarter}' and week_day=${weekDay} and class_index=${classIndex}
+        and !(start_week &gt; ${endWeek} or end_week &lt; ${startWeek})
+        )
+        <include refid="list_where">
+            <property name="building" value="${building}"></property>
+            <property name="floor" value="${floor}"></property>
+            <property name="leftSize" value="${leftSize}"></property>
+            <property name="rightSize" value="${rightSize}"></property>
+        </include>
+        <include refid="commonSql.common_page_order">
+            <property name="offset" value="${offset}"></property>
+            <property name="pageSize" value="${pageSize}"></property>
+            <property name="ascOrDesc" value="${ascOrDesc}"></property>
+            <property name="orderBy" value="${orderBy}"></property>
+        </include>
+    </select>
+    <select id="find" resultType="com.lyuan.admin.course.entity.Course" parameterType="com.lyuan.admin.course.entity.Course">
+        select * from course
+        where classroom_id = ${classroomId} and year=${year} and quarter='${quarter}' and week_day=${weekDay} and class_index=${classIndex}
+        and !(start_week &gt; ${endWeek} or end_week &lt; ${startWeek})
+    </select>
+</mapper>
