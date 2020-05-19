@@ -40,6 +40,6 @@ mybatis-plus:
 #日志相关配置，使用默认logback日志实现
 logging:
   level:
-    #这句会在日志输出sql语句
-    com.lyuan.springbootstudy1: debug
+    #在日志输出sql语句
+    com.lyuan: debug
 
