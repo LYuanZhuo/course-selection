@@ -46,12 +46,6 @@ public class TestController {
     @GetMapping
     @Interception
     public BaseResponse get(){
-        Teacher teacher = new Teacher();
-        for (int i = 1;i<=(RandomValue.pic.length-1);i++){
-            teacher.setHeadImage(RandomValue.pic[i].replace("127.0.0.1","47.97.91.13"));
-            iTeacherService.update(teacher,new UpdateWrapper<Teacher>().eq("head_image",RandomValue.pic[i]));
-
-        }
          return null;
     }
 }
