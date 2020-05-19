@@ -16,7 +16,7 @@ import com.lyuan.applet.comment.service.IAppletCommentService;
 import com.lyuan.applet.user.entity.UserScoreDTO;
 import com.lyuan.applet.user.mapper.AppletUserMapper;
 import com.lyuan.common.define.enumDefine.ResponseEnum;
-import com.lyuan.common.define.enumDefine.UserScoreDefine;
+import com.lyuan.common.define.UserScoreDefine;
 import com.lyuan.common.entity.BaseResponse;
 import com.lyuan.common.util.JWTUtil;
 import org.springframework.stereotype.Service;
@@ -24,7 +24,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
-import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 

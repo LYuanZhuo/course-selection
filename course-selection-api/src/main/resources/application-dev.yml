@@ -12,3 +12,7 @@ spring:
     static-path-pattern: /static/**
   resources:
     static-locations: file:F:/project_resource/course-selection/
+logging:
+  file:
+    name: F:\project_resource\course-selection\logs\course-selection.log
+#日志打印位置

@@ -13,9 +13,10 @@ spring:
     static-locations: file:/home/web/course-selection/
   redis:
     password: ZIB12584884
+
+#日志打印位置
 logging:
   file:
-    path: /home/web/course-selection
-    name: course_selection.log
+    name: /home/web/course-selection/course-selection.log
 
 

@@ -92,14 +92,6 @@
 			<artifactId>spring-boot-starter-data-redis</artifactId>
 		</dependency>
 
-		<!--日志-->
-		<!--Log4j-->
-		<dependency>
-			<groupId>log4j</groupId>
-			<artifactId>log4j</artifactId>
-			<version>1.2.17</version>
-		</dependency>
-
 		<!--工具-->
 		<!--commons-lang3-->
 		<dependency>

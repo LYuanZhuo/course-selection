@@ -1,4 +1,4 @@
-package com.lyuan.common.define.enumDefine;
+package com.lyuan.common.define;
 
 /**
  * @Description:
